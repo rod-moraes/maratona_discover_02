@@ -1,10 +1,14 @@
 const express = require("express")
 const server = express()
 const routes = require("./routes")
+const path = require("path")
 
 
 // habilita o motor ejs
 server.set("view engine","ejs")
+
+// Mudar localização da views
+server.set('views',path.join(__dirname,"views"))
 
 //rotas para arquivos estaticos
 server.use(express.static("public"))

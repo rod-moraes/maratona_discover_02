@@ -57,3 +57,7 @@ input {
 ::placeholder {
   color: #BFBFCC;
 }
+
+#page-profile .input-wrapper{
+  width: 50%;
+}
