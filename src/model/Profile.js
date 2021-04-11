@@ -22,8 +22,8 @@ module.exports = {
       name: data.name,
       avatar: data.avatar,
       "monthly-budget": data.monthly_budget,
-      "hours-per-day": data.days_per_week,
-      "days-per-week": data.hours_per_day,
+      "hours-per-day": data.hours_per_day,
+      "days-per-week": data.days_per_week,
       "vacation-per-year": data.vacation_per_year,
       "value-hour": data.value_hour,
     };

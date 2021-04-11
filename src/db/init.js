@@ -18,9 +18,12 @@ const initDb = {
     await db.exec(`CREATE TABLE jobs (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
+    order_jobs INTEGER,
     daily_hours INT,
     total_hours INT,
-    created_at DATETIME
+    created_at DATETIME,
+    initial_job DATETIME,
+    status TEXT
     )`);
 
     await db.run(`INSERT INTO profile (
@@ -36,33 +39,79 @@ const initDb = {
       "https://github.com/rod-moraes.png",
       3000,
       5,
-      5,
+      24,
       4,
       70
     );`);
 
     await db.run(`INSERT INTO jobs (
     name, 
+    order_jobs,
     daily_hours,
     total_hours,
-    created_at
+    created_at,
+    initial_job,
+    status
     ) VALUES(
       "Pizzaria Guloso",
+      1,
       2,
       1,
-      1617514376018
+      1617514376018,
+      0,
+      "to-do"
     );`);
+    await db.run(`INSERT INTO jobs (
+      name, 
+      order_jobs,
+      daily_hours,
+      total_hours,
+      created_at,
+      initial_job,
+      status
+      ) VALUES(
+        "Pizzaria Guloso2",
+        2,
+        3,
+        3,
+        1617514376018,
+        0,
+        "to-do"
+      );`);
+      await db.run(`INSERT INTO jobs (
+        name, 
+        order_jobs,
+        daily_hours,
+        total_hours,
+        created_at,
+        initial_job,
+        status
+        ) VALUES(
+          "Pizzaria Guloso3",
+          3,
+          5,
+          5,
+          1617514376018,
+          0,
+          "to-do"
+        );`);
 
     await db.run(`INSERT INTO jobs (
     name, 
+    order_jobs,
     daily_hours,
     total_hours,
-    created_at
+    created_at,
+    initial_job,
+    status
     ) VALUES(
       "OneTwo Projects",
-      3,
-      47,
-      1617514376018
+      4,
+      6,
+      6,
+      1617514376018,
+      0,
+      "to-do"
     );`);
 
     await db.close();

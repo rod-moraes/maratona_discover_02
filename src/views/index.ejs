@@ -21,7 +21,7 @@
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <script src="scripts/index.js" defer type="module"></script>
+    <script src="/scripts/index.js" defer type="module"></script>
   </head>
   <body id="page-index">
     <header class="page-header">
@@ -79,9 +79,9 @@
         <h1 class="sr-only">Trabalhos</h1>
 
         <div class="cards">
-          <%jobs.forEach((job)=>{%>
+          <%jobs.forEach((job,index)=>{%>
           <div class="card <%= job.status %>" data-id="<%= job.id %> ">
-            <div class="id column"><%= job.id %></div>
+            <div class="id column"><%= index+1 %></div>
             <div class="name column"><%= job.name %></div>
             <div class="deadline column">
               <span>Prazo</span>
@@ -107,21 +107,26 @@
               >
                 <img src="/images/edit-24.svg" alt="Editar Job" />
               </a>
-              <button class="delete button white" title="Excluir Job">
+              <button class="delete button white" title="Excluir Job"  >
                 <img src="/images/trash-24.svg" alt="Excluir Job" />
               </button>
+              
+              <button class="up button white" title="Subir Job" <% if(jobs.length==1||jobs[0]==job){%>disabled <% } %> >
+                <img src="/images/up-24.svg" alt="Subir Job" />
+              </button>
+              <button class="down button white" title="Descer Job" <% if(jobs.length==1||jobs[jobs.length-1]==job){%>disabled <% } %>>
+                <img src="/images/down-24.svg" alt="Descer Job" />
+              </button> 
             </div>
-          </div>
-          <%})%>
+          </div><%})%>
           <!-- end card -->
         </div>
         <!-- end cards -->
       </main>
     </div>
     <!-- end container -->
-
-    <div class="modal-wrapper">
-      <div class="modal">
+    <div class="modal-wrapperDelete" >
+      <div class="modalDelete">
         <img src="/images/trash-48.svg" alt="Excluir Job" title="Excluir Job" />
         <h3>Excluir Job</h3>
         <p>
@@ -136,6 +141,40 @@
         </footer>
       </div>
       <form method="post" action="/job/delete/ " id="delete-job"></form>
+    </div>
+
+    <div class="modal-wrapperUp">
+      <div class="modalUp">
+        <img src="/images/up-48.svg" alt="Subir Job" title="Subir Job" />
+        <h3>Subir Job</h3>
+        <p>
+          Quer mesmo subir esse job? <br />
+        </p>
+        <footer>
+          <a class="button gray" href="#">Cancelar</a>
+          <button class="button red" type="submit" form="up-job">
+            Subir Job
+          </button>
+        </footer>
+      </div>
+      <form method="post" action="/job/up/" id="up-job"></form>
+    </div>
+
+    <div class="modal-wrapperDown">
+      <div class="modalDown">
+        <img src="/images/down-48.svg" alt="Descer Job" title="Descer Job" />
+        <h3>Descer Job</h3>
+        <p>
+          Quer mesmo descer esse job? <br />
+        </p>
+        <footer>
+          <a class="button gray" href="#">Cancelar</a>
+          <button class="button red" type="submit" form="down-job">
+            Descer Job
+          </button>
+        </footer>
+      </div>
+      <form method="post" action="/job/down/ " id="down-job"></form>
     </div>
     <!-- end modal-wrapper -->
   </body>

@@ -154,13 +154,10 @@ main {
 /* -------------------------------------------------- */
 .card {
   display: grid;
-  grid-template-columns: 5% 35% 20% 15% 15% 10%;
+  grid-template-columns: 4% 32% 18% 13% 13% 20%;
   align-items: center;
-
   margin-bottom:  0.5rem;
-
   position: relative;
-
   transition: all 0.2s;
 }
 
@@ -229,13 +226,13 @@ main {
 
 @media(max-width:1390px) {
   .card {
-    grid-template-columns: 5% 30% 20% 15% 17.25% 12.25%;
+    grid-template-columns: 4% 28% 20% 12% 14% 22%;
   }
 }
 
 @media(max-width:970px) {
   .card {
-    grid-template-columns: 31% 23% 13% 20.25% 12.25%;
+    grid-template-columns: 28.5% 20% 11% 18% 22.5%;
   }
   
   .column.id {

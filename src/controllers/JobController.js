@@ -3,6 +3,16 @@ const Job = require("../model/Job");
 const JobUtils = require("../utils/JobUtils");
 
 module.exports = {
+  async up(req, res) {
+    const jobId = req.params.id;
+    const validaded = await Job.up(jobId);
+    return validaded ? res.redirect("/"):res.redirect("/not-found");
+  },
+  async down(req, res) {
+    const jobId = req.params.id;
+    const validaded = await Job.down(jobId);
+    return validaded ? res.redirect("/"):res.redirect("/not-found");
+  },
   async save(req, res) {
     const job = {
       name: req.body.name,
@@ -29,7 +39,6 @@ module.exports = {
     job.budget = JobUtils.calculateBudget(job, profile["value-hour"]);
     return res.render("job-edit", { job });
   },
-
   async update(req, res) {
     const jobId = req.params.id; //Pega o dado da url
 
@@ -38,12 +47,13 @@ module.exports = {
       name: req.body.name,
       "total-hours": req.body["total-hours"],
       "daily-hours": req.body["daily-hours"],
+      initial_job: req.body.initial_job,
+      status: req.body.status
     };
 
-    Job.update(updatedJob);
+    Job.updateData(updatedJob);
     return res.redirect("/job/" + jobId);
   },
-
   async delete(req, res) {
     const jobId = req.params.id;
     await Job.delete(jobId);
