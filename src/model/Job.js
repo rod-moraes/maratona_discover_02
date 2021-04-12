@@ -3,7 +3,7 @@ const Database = require("../db/config");
 module.exports = {
   async get() {
     const db = await Database();
-    const data = await db.all(`SELECT * FROM jobs ORDER BY order_jobs ASC`);
+    const data = await db.all(`SELECT * FROM jobs ORDER BY order_jobs ASC `);
     await db.close();
     const newData = data.map((job) => {
       return {
