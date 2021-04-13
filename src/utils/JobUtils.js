@@ -6,17 +6,13 @@ module.exports = {
     const createdDate = new Date(job.initial_job);
     const dueDay = createdDate.getMilliseconds() + Number(remainingMs);
     const dueDate = createdDate.setMilliseconds(dueDay);
-
-    console.log(dueDate);
-    console.log(Date.now());
     const timeDiffInMs = dueDate - Date.now();
     const dayDiff = Math.ceil(timeDiffInMs * convertMstoDay);
-    console.log(dayDiff);
     return dayDiff;
   },
   calculateBudget: (job, valueHour) => valueHour * job["total-hours"],
 
-  verifyJobsProgressToDoDone(jobs,profile) {
+  verifyJobsProgressToDoDone(jobs, profile) {
     let jobHours = 0;
     jobs = jobs.map((job) => {
       if (job.status == "progress") {
@@ -43,7 +39,7 @@ module.exports = {
     return jobs;
   },
 
-  initialJobsProgressToDo(jobs,profile){
+  initialJobsProgressToDo(jobs, profile) {
     let jobHours = 0;
     return jobs.map((job) => {
       if (jobHours <= profile["hours-per-day"]) {
@@ -55,5 +51,19 @@ module.exports = {
       }
       return job;
     });
-  }
+  },
+  verifyDailyHours(job, profile) {
+    if (job["daily-hours"]>24) {
+      return {
+        body: "As horas dedicadas por dia no job não podem ultrapassar 24hrs",
+        title: "message",
+      };
+    } else if (job["daily-hours"] > profile["hours-per-day"]) {
+      return {
+        body:
+          "As horas dedicadas por dia no job não podem ultrapassar as horas trabalhadas por dia",
+        title: "message",
+      };
+    }
+  },
 };

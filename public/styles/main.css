@@ -27,9 +27,12 @@
   --color-cancel: #E1E3E5;
   --color-delete: #EB3B35; 
   --color-save: #36B336;
+  --color-to-do: #e79c24;
   
   --color-badge-progress-text: var(--color-save);
   --color-badge-progress-background: #E8F8E8;
+  --color-badge-todo-text:var(--color-to-do);
+  --color-badge-todo-background:   #fcfce1;
   --color-badge-done-text: var(--color-delete);
   --color-badge-done-background:#FAECEB;
 

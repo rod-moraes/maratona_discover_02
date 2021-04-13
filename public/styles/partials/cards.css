@@ -31,6 +31,11 @@
   color: var(--color-badge-progress-text);
 }
 
+.to-do .badge{
+  background: var(--color-badge-todo-background);
+  color: var(--color-badge-todo-text);
+}
+
 .done .badge {
   background: var(--color-badge-done-background);
   color: var(--color-badge-done-text);
