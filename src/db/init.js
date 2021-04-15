@@ -8,7 +8,7 @@ const initDb = {
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT,
     avatar TEXT,
-    monthly_budget INT,
+    monthly_budget REAL,
     days_per_week INT,
     hours_per_day INT,
     vacation_per_year INT,

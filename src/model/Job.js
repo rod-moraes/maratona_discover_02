@@ -30,6 +30,7 @@ module.exports = {
       `);
     await db.close();
   },
+  
   async updateData(updatedJob) {
     const db = await Database();
     await db.run(`UPDATE jobs SET
@@ -89,6 +90,19 @@ module.exports = {
       return false;
     }
 
+    if(jobUp.status == "to-do" && jobDown.status == "progress"){
+      await db.run(`UPDATE jobs SET
+        status = "to-do",
+        initial_job = 0
+        WHERE id = ${jobUp.id}
+      `);
+      await db.run(`UPDATE jobs SET
+        status = "to-do",
+        initial_job = 0
+        WHERE id = ${jobDown.id}
+      `);
+    }
+
     //Atualizando o job que eu quero colocar para cima
     await db.run(`UPDATE jobs SET
       order_jobs = ${jobDown.order_jobs}
@@ -97,8 +111,8 @@ module.exports = {
 
     //Atualizando o job para "baixo"
     await db.run(`UPDATE jobs SET
-    order_jobs = ${jobUp.order_jobs}
-    WHERE id = ${jobDown.id}
+      order_jobs = ${jobUp.order_jobs}
+      WHERE id = ${jobDown.id}
     `);
 
     await db.close();
@@ -120,6 +134,19 @@ module.exports = {
     if(!jobUp||!jobDown){
       await db.close();
       return false;
+    }
+
+    if(jobUp.status == "to-do" && jobDown.status == "progress"){
+      await db.run(`UPDATE jobs SET
+        status = "to-do",
+        initial_job = 0
+        WHERE id = ${jobUp.id}
+      `);
+      await db.run(`UPDATE jobs SET
+        status = "to-do",
+        initial_job = 0
+        WHERE id = ${jobDown.id}
+      `);
     }
 
     //Atualizando o job que eu quero colocar para cima

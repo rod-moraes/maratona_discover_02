@@ -35,7 +35,7 @@ module.exports = {
     await db.run(`UPDATE profile SET
     name = "${newData.name}",
     avatar = "${newData.avatar}",
-    monthly_budget = ${newData["monthly-budget"]},
+    monthly_budget = ${Number(newData["monthly-budget"].replace(",","."))},
     days_per_week = ${newData["days-per-week"]},
     hours_per_day = ${newData["hours-per-day"]},
     vacation_per_year = ${newData["vacation-per-year"]},

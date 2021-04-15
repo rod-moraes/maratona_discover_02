@@ -60,6 +60,10 @@
               Em andamento
             </div>
             <div class="finished">
+              <strong><%= statusCount["to-do"] %> </strong>
+              Em espera
+            </div>
+            <div class="finished">
               <strong><%= statusCount.done %> </strong>
               Encerrados
             </div>
@@ -155,8 +159,10 @@
       <div class="modalUp">
         <img src="/images/up-48.svg" alt="Subir Job" title="Subir Job" />
         <h3>Subir Job</h3>
+        <h4>Quer mesmo subir esse job?</h4>
         <p>
-          Quer mesmo subir esse job? <br />
+          Trocas entre "Em andamento" e "Em espera"<br/>
+          Podem resetar o tempo da tarefa 
         </p>
         <footer>
           <a class="button gray" href="#">Cancelar</a>
@@ -172,8 +178,10 @@
       <div class="modalDown">
         <img src="/images/down-48.svg" alt="Descer Job" title="Descer Job" />
         <h3>Descer Job</h3>
+        <h4>Quer mesmo descer esse job?</h4>
         <p>
-          Quer mesmo descer esse job? <br />
+          Trocas entre "Em andamento" e "Em espera"<br/>
+          Podem resetar o tempo da tarefa 
         </p>
         <footer>
           <a class="button gray" href="#">Cancelar</a>

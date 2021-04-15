@@ -1,7 +1,6 @@
 module.exports = {
-  remainingDays(job) {
-    const remainingMs =
-      (job["total-hours"] / job["daily-hours"]) * 24 * 60 * 60 * 1000;
+  remainingDays(job,profile) {
+    const remainingMs = ((job["total-hours"] / job["daily-hours"]) * 24 * 60 * 60 * 1000*7)/profile["days-per-week"];
     const convertMstoDay = 1.1574074074067 * 10 ** -8;
     const createdDate = new Date(job.initial_job);
     const dueDay = createdDate.getMilliseconds() + Number(remainingMs);
@@ -16,7 +15,7 @@ module.exports = {
     let jobHours = 0;
     jobs = jobs.map((job) => {
       if (job.status == "progress") {
-        const remaining = this.remainingDays(job);
+        const remaining = this.remainingDays(job,profile);
         job.status = remaining <= 0 ? "done" : "progress";
         job.status == "progress"
           ? (jobHours += job["daily-hours"])
@@ -52,6 +51,7 @@ module.exports = {
       return job;
     });
   },
+
   verifyDailyHours(job, profile) {
     if (job["daily-hours"]>24) {
       return {
@@ -62,6 +62,12 @@ module.exports = {
       return {
         body:
           "As horas dedicadas por dia no job não podem ultrapassar as horas trabalhadas por dia",
+        title: "message",
+      };
+    }else if(job["daily-hours"] <= 0){
+      return {
+        body:
+          "As horas por dia dedicadas ao job não podem estar vazias ou ser menor que 1 hora",
         title: "message",
       };
     }
