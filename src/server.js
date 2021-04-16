@@ -1,24 +1,24 @@
-const express = require("express")
-const server = express()
-const routes = require("./routes")
-const path = require("path")
+const express = require("express");
+const server = express();
+const routes = require("./routes");
+const path = require("path");
+const cors = require("cors");
 
-
+server.use(cors());
 // habilita o motor ejs
-server.set("view engine","ejs")
+server.set("view engine", "ejs");
 
 // Mudar localização da views
-server.set('views',path.join(__dirname,"views"))
+server.set("views", path.join(__dirname, "views"));
 
 //rotas para arquivos estaticos
-server.use(express.static("public"))
+server.use(express.static("public"));
 
 //usar o req.body
-server.use(express.urlencoded({ extended: true}))
+server.use(express.urlencoded({ extended: true }));
 
 // request, response
-server.use(routes)
-
+server.use(routes);
 
 //abre a porta 3000 pro servidor
-server.listen(3000,()=> console.log("rodando"))
+server.listen(3000, () => console.log("rodando"));
