@@ -37,11 +37,11 @@ const initDb = {
     ) VALUES(
       "Rodrigo Moraes",
       "https://github.com/rod-moraes.png",
-      3000,
+      8000,
       5,
-      24,
+      3,
       4,
-      70
+      133.33
     );`);
 
     await db.run(`INSERT INTO jobs (
@@ -70,7 +70,7 @@ const initDb = {
       initial_job,
       status
       ) VALUES(
-        "Pizzaria Guloso2",
+        "Maratona Discover 2",
         2,
         3,
         3,
@@ -78,41 +78,6 @@ const initDb = {
         0,
         "to-do"
       );`);
-      await db.run(`INSERT INTO jobs (
-        name, 
-        order_jobs,
-        daily_hours,
-        total_hours,
-        created_at,
-        initial_job,
-        status
-        ) VALUES(
-          "Pizzaria Guloso3",
-          3,
-          5,
-          5,
-          1617514376018,
-          0,
-          "to-do"
-        );`);
-
-    await db.run(`INSERT INTO jobs (
-    name, 
-    order_jobs,
-    daily_hours,
-    total_hours,
-    created_at,
-    initial_job,
-    status
-    ) VALUES(
-      "OneTwo Projects",
-      4,
-      6,
-      6,
-      1617514376018,
-      0,
-      "to-do"
-    );`);
 
     await db.close();
   }

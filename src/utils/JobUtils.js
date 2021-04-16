@@ -13,7 +13,7 @@ module.exports = {
 
   verifyJobsProgressToDoDone(jobs, profile) {
     let jobHours = 0;
-    jobs = jobs.map((job) => {
+    let newJobs = jobs.map((job) => {
       if (job.status == "progress") {
         const remaining = this.remainingDays(job,profile);
         job.status = remaining <= 0 ? "done" : "progress";
@@ -24,10 +24,9 @@ module.exports = {
       return job;
     });
     //Verificar se eu posso pegar algum to-do e transformar em progress
-    jobs = jobs.map((job) => {
-      if (jobHours <= profile["hours-per-day"] && job.status == "to-do") {
-        jobHours += job["daily-hours"];
-        if (jobHours <= profile["hours-per-day"]) {
+    newJobs = newJobs.map((job) => {
+      if(job.status == "to-do"){
+        if ((jobHours+= job["daily-hours"]) <= profile["hours-per-day"]) {
           job.initial_job = Date.now();
           job.status = "progress";
         }
@@ -35,18 +34,17 @@ module.exports = {
       return job;
     });
 
-    return jobs;
+    return newJobs;
   },
 
   initialJobsProgressToDo(jobs, profile) {
     let jobHours = 0;
     return jobs.map((job) => {
-      if (jobHours <= profile["hours-per-day"]) {
-        jobHours += job["daily-hours"];
-        job.initial_job = Date.now();
-        job.status = "progress";
+      if ( (jobHours+= job["daily-hours"]) <= profile["hours-per-day"]) {
+          job.initial_job = Date.now();
+          job.status = "progress";
       } else {
-        job.status = "to do";
+        job.status = "to-do";
       }
       return job;
     });

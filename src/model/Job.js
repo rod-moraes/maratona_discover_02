@@ -50,9 +50,6 @@ module.exports = {
   },
   async create(newJob) {
     const db = await Database();
-    const job = await db.get(`SELECT *
-    FROM  jobs
-    ORDER BY id DESC`);
     await db.run(`INSERT INTO jobs (
       name,
       order_jobs,
@@ -63,13 +60,20 @@ module.exports = {
       status
     ) VALUES (
       "${newJob.name}",
-      ${job?.id ? job.id+1:1},
+      0,
       ${newJob["daily-hours"]},
       ${newJob["total-hours"]},
       ${newJob.createdAt},
       0,
       "to-do"
     )`);
+    const job = await db.get(`SELECT *
+    FROM  jobs
+    ORDER BY id DESC`);
+    await db.run(`UPDATE jobs SET
+      order_jobs = "${job.id}"
+      WHERE id = ${job.id}
+    `);
     await db.close();
   },
   async up(jobId) {
