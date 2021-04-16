@@ -1,12 +1,23 @@
 module.exports = {
   remainingDays(job,profile) {
-    const remainingMs = ((job["total-hours"] / job["daily-hours"]) * 24 * 60 * 60 * 1000*7)/profile["days-per-week"];
+    const remainingDays = (job["total-hours"] / job["daily-hours"]);
+    let newDayDiff = 0;
+    let auxiliar = remainingDays;
+
+    while(!(auxiliar<=profile["days-per-week"])){
+        auxiliar -= profile["days-per-week"]
+        newDayDiff += 7;
+    }
+    newDayDiff += Math.ceil(auxiliar);
+
+    const remainingMs = newDayDiff* 24 * 60 * 60 * 1000;
     const convertMstoDay = 1.1574074074067 * 10 ** -8;
     const createdDate = new Date(job.initial_job);
     const dueDay = createdDate.getMilliseconds() + Number(remainingMs);
     const dueDate = createdDate.setMilliseconds(dueDay);
     const timeDiffInMs = dueDate - Date.now();
     const dayDiff = Math.ceil(timeDiffInMs * convertMstoDay);
+
     return dayDiff;
   },
   calculateBudget: (job, valueHour) => valueHour * job["total-hours"],
