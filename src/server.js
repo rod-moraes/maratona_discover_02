@@ -21,4 +21,4 @@ server.use(express.urlencoded({ extended: true }));
 server.use(routes);
 
 //abre a porta 3000 pro servidor
-server.listen(3000, () => console.log("rodando"));
+server.listen(process.env.PORT || 3000, () => console.log("rodando"));
